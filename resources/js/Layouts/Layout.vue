@@ -1,12 +1,14 @@
+<script setup>
+import { Link, Head } from "@inertiajs/vue3";
+</script>
+
 <template>
     <div>
         <header class="text-white bg-indigo-500">
-            <nav
-                class="flex items-center justify-between max-w-screen-lg p-3 mx-auto"
-            >
-                <div class="space-x-6">
-                    <a href="/">Home</a>
-                    <a href="/about">About</a>
+            <nav class="flex items-center justify-between max-w-screen-lg p-3 mx-auto">
+                <div class="space-x-6 uppercase font-semibold">
+                    <Link href="/">Home</Link>
+                    <Link href="/about">About</Link>
                 </div>
             </nav>
         </header>
