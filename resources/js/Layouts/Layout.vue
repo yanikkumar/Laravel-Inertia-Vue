@@ -8,8 +8,8 @@ import { Link, Head } from "@inertiajs/vue3";
             <nav class="flex items-center justify-between max-w-screen-lg p-3 mx-auto">
                 <h1>{{ $page.props.appName }}</h1>
                 <div class="space-x-6 uppercase font-semibold">
-                    <Link href="/">Home</Link>
-                    <Link href="/about">About</Link>
+                    <Link :href="route('home')">Home</Link>
+                    <Link :href="route('about')">About</Link>
                 </div>
             </nav>
         </header>
