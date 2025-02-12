@@ -8,6 +8,6 @@ Route::get('/', function () {
 });
 Route::get('/about', function () {
     return Inertia::render('About', [
-        'user' => 'Yanik'
+        'user' => 'InertiaJS'
     ]);
 });
