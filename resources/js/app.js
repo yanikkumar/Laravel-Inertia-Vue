@@ -15,8 +15,14 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
-            .component('Head', Head)
-            .component('Link', Link)
+            .component("Head", Head)
+            .component("Link", Link)
             .mount(el);
+    },
+    progress: {
+        delay: 250,
+        color: "#fff",
+        includeCSS: true,
+        showSpinner: true,
     },
 });
