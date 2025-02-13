@@ -1,15 +1,25 @@
 <script setup>
+import { ref, watch } from 'vue';
+import { router } from '@inertiajs/vue3';
 import PaginationLinks from './Component/PaginationLinks.vue';
-defineProps({
-    users: Object
-})
+import { debounce } from 'lodash';
+
+const props = defineProps({
+    users: Object,
+    searchTerm: String
+});
+
+const search = ref(props.searchTerm);
+
+watch(search, debounce((q) => {
+    router.get('/', { search: q }, { preserveState: true })
+}, 500))
 
 //Format Date
 const getDate = (date) =>
     new Date(date).toLocaleDateString("en-us", {
         year: "numeric", month: "long", day: "numeric"
     })
-
 </script>
 
 <template>
@@ -25,6 +35,11 @@ const getDate = (date) =>
         </div>, welcome to your first Inertia app!</p>
 
         <hr class="my-3" />
+        <div class="flex justify-end mb-3">
+            <div class="w-1/4">
+                <input type="search" placeholder="Search for users..." v-model="search">
+            </div>
+        </div>
         <table>
             <thead>
                 <tr class="bg-slate-300">
@@ -54,7 +69,7 @@ const getDate = (date) =>
             <p class="text-slate-600 text-sm ms-auto m-2">Showing {{ users.from }} to {{ users.to }} of {{ users.total }}</p> -->
 
             <!-- New Way with created component -->
-            <PaginationLinks :paginator="users"/>
+            <PaginationLinks :paginator="users" />
         </div>
 
         <hr class="my-3" />

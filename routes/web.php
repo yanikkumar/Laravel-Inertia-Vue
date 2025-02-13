@@ -2,12 +2,18 @@
 
 use App\Http\Controllers\AuthController;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Home',[
-        'users' => User::paginate(7)
+Route::get('/', function (Request $request) {
+    return Inertia::render('Home', [
+        'users' => User::when($request->search, function ($query) use ($request) {
+            $query
+                ->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%');
+        })->paginate(10)->withQueryString(),
+        'searchTerm' => $request->search
     ]);
 })->name('home');
 Route::get('/about', function () {
@@ -29,6 +35,4 @@ Route::middleware('guest')->group(function () {
 
     Route::inertia('/login', 'Auth/Login')->name('login');
     Route::post('/login', [AuthController::class, 'login']);
-
 });
-
