@@ -6,11 +6,10 @@
         <h1 class="inline p-2 text-5xl font-bold border-2 rounded-lg">
             Let's Learn InertiaJS!
         </h1>
-        <p class="mt-5">
-            Hello
-            <span class="font-semibold">{{ $page.props.auth.user.name }}</span
-            >, welcome to your first Inertia app!
-        </p>
+        <p class="mt-5">Hello
+        <div class="inline font-semibold" v-if="$page.props.auth.user">
+            {{ $page.props.auth.user.name }}
+        </div>, welcome to your first Inertia app!</p>
 
         <hr class="my-3" />
 

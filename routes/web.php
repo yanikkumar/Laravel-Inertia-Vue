@@ -13,9 +13,19 @@ Route::get('/about', function () {
     ]);
 })->name('about');
 
-Route::inertia('/register', 'Auth/Register')->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+// Authenticated Routes
+Route::middleware('auth')->group(function () {
+    Route::inertia('/dashboard', 'Dashboard')->name('dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
-Route::inertia('/login', 'Auth/Login')->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+// Guest Routes
+Route::middleware('guest')->group(function () {
+    Route::inertia('/register', 'Auth/Register')->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+
+    Route::inertia('/login', 'Auth/Login')->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+
+});
 
