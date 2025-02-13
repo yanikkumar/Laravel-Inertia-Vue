@@ -3,16 +3,15 @@ import { useForm } from "@inertiajs/vue3";
 import TextInput from "../Component/TextInput.vue";
 
 const formData = useForm({
-    name: null,
     email: null,
     password: null,
-    password_confirmation: null,
+    remember: null,
 });
 
 const submit = () => {
     // console.log(formData);
-    formData.post(route("register"), {
-        onError: () => formData.reset("password", "password_confirmation"),
+    formData.post(route("login"), {
+        onError: () => formData.reset("password", "remember"),
     });
 };
 </script>
@@ -20,14 +19,9 @@ const submit = () => {
 <template>
     <Head :title="`| ${$page.component}`"></Head>
     <div class="p-4 m-4">
-        <h1 class="title">Register</h1>
+        <h1 class="title">Login</h1>
         <div class="mx-auto w2/4">
             <form @submit.prevent="submit">
-                <TextInput
-                    name="name"
-                    v-model="formData.name"
-                    :message="formData.errors.name"
-                />
                 <TextInput
                     name="email"
                     type="email"
@@ -40,18 +34,25 @@ const submit = () => {
                     v-model="formData.password"
                     :message="formData.errors.password"
                 />
-                <TextInput
-                    name="Confirm Password"
-                    type="password"
-                    v-model="formData.password_confirmation"
-                />
-                <div>
-                    <p class="mb-2 text-slate-600">
-                        Already a user?
-                        <a :href="route('login')" class="text-link">Login</a>
+                <div class="flex justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                        <input
+                            id="remember"
+                            type="checkbox"
+                            v-model="formData.remember"
+                        />
+                        <label for="remember">Remember Me</label>
+                    </div>
+                    <p class="text-slate-600">
+                        Need an Account?
+                        <a :href="route('register')" class="text-link"
+                            >Register</a
+                        >
                     </p>
+                </div>
+                <div>
                     <button class="primary-btn" :disabled="formData.processing">
-                        Register
+                        Login
                     </button>
                 </div>
             </form>
