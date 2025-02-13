@@ -27,7 +27,7 @@ import { Link, Head } from "@inertiajs/vue3";
                             }"
                             >About</Link
                         >
-                        <div v-if="$page.props.auth.user">
+                        <div v-if="$page.props.auth.user" class="space-x-2">
                             <Link
                                 :href="route('dashboard')"
                                 class="nav-link"
