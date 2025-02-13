@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        sleep(1);
+        // sleep(1);
 
         $fields = $request->validate([
             'avatar' => 'file|nullable|mimes:png,jpg|max:30',
@@ -27,7 +27,7 @@ class AuthController extends Controller
         $user = User::create($fields);
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('message', 'Welcome to Laravel Inertia App!');
     }
 
     public function login(Request $request)
