@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    sleep(1);
-    return Inertia::render('Home');
+    return Inertia::render('Home',[
+        'users' => User::paginate(7)
+    ]);
 })->name('home');
 Route::get('/about', function () {
     return Inertia::render('About', [
