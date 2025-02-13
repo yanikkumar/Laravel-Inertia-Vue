@@ -27,7 +27,21 @@ import { Link, Head } from "@inertiajs/vue3";
                             }"
                             >About</Link
                         >
-                        <div v-if="$page.props.auth.user" class="space-x-2">
+                        <div
+                            v-if="$page.props.auth.user"
+                            class="flex space-x-2"
+                        >
+                            <img
+                                class="avatar"
+                                :src="
+                                    $page.props.auth.user.avatar
+                                        ? 'storage/' +
+                                          $page.props.auth.user.avatar
+                                        : 'storage/avatars/avatar.png'
+                                "
+                                alt=""
+                                srcset=""
+                            />
                             <Link
                                 :href="route('dashboard')"
                                 class="nav-link"

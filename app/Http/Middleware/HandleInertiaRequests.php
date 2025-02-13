@@ -40,7 +40,7 @@ class HandleInertiaRequests extends Middleware
             'appName' => 'InertiaJS' ?? null,
             // Lazily...
             'auth.user' => fn() => $request->user()
-                ? $request->user()->only('id', 'name')
+                ? $request->user()->only('id', 'name', 'avatar')
                 : null,
         ]);
     }
